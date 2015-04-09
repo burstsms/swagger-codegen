@@ -1,4 +1,5 @@
 {
+  "private":true,
   "name": "swagger-codegen",
   "version": "1.0.0",
   "description": "Modified code generator",
