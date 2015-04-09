@@ -1,1 +1,14 @@
-
+{
+  "name": "swagger-codegen",
+  "version": "1.0.0",
+  "description": "Modified code generator",
+  "author": "Team BurstSMS",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git@bitbucket.org:burstsms/swagger-codegen.git"
+  },
+  "keywords": [
+    "burstsms-swagger-codegen"
+  ]
+}
