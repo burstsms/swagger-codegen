@@ -29,7 +29,7 @@ public class PhpClientCodegen extends DefaultCodegen implements CodegenConfig {
     super();
 
     //TODO determine hte package name from host name
-    invokerPackage = camelize("SwaggerPetstore"); 
+    invokerPackage = camelize("BurstSmsApi"); 
 
     String packagePath = invokerPackage + "-php";
 
