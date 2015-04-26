@@ -22,7 +22,7 @@ class {{classname}}
 
   def config_swagger()
     Swagger.configure do |config|
-      config.host = basePath.gsub("http://", "").gsub("/", "")
+      config.host = {{basePath}}.gsub("http://", "").gsub("/", "")
       config.base_path = "/"
       config.format = "x-www-form-urlencoded"
       config.camelize_params = false
@@ -36,7 +36,7 @@ class {{classname}}
 {{#allParams}}{{^optional}}  # @param {{paramName}} {{description}}
 {{/optional}}{{/allParams}}{{#allParams}}{{#optional}}  # @option opts [{{dataType}}] :{{baseName}} {{description}}
 {{/optional}}{{/allParams}}  # @return {{#returnType}}{{{returnType}}}{{/returnType}}{{^returnType}}void{{/returnType}}
-  def {{nickname}} ({{#allParams}}{{paramName}}{{#defaultValue}} = {{{defaultValue}}}{{/defaultValue}}, {{/allParams}}opts={})
+  def {{nickname}} ({{#allParams}}{{paramName}} = nil{{#defaultValue}} = {{{defaultValue}}}{{/defaultValue}}, {{/allParams}}opts={})
     query_param_keys = [{{#queryParams}}:{{paramName}}{{#hasMore}},{{/hasMore}}{{/queryParams}}]
     headerParams = {}
 
