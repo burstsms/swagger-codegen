@@ -1,11 +1,5 @@
 package io.swagger.client;
 
-
-import com.fasterxml.jackson.core.JsonGenerator.Feature;
-import com.fasterxml.jackson.databind.*;
-import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
 import org.apache.http.*;
 import org.apache.http.client.*;
 import org.apache.http.client.methods.*;
@@ -16,6 +10,7 @@ import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.*;
 import org.apache.http.impl.conn.*;
+import org.apache.http.impl.conn.tsccm.*;
 import org.apache.http.params.*;
 import org.apache.http.util.EntityUtils;
 
@@ -53,6 +48,8 @@ import javax.crypto.spec.SecretKeySpec;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
+
+import com.google.gson.JsonParseException;
 
 public class ApiInvoker {
   private static ApiInvoker INSTANCE = new ApiInvoker();
@@ -158,9 +155,7 @@ public class ApiInvoker {
   public static Object deserialize(String json, String containerType, Class cls) throws ApiException {
     try{
       if("list".equalsIgnoreCase(containerType) || "array".equalsIgnoreCase(containerType)) {
-        JavaType typeInfo = JsonUtil.getJsonMapper().getTypeFactory().constructCollectionType(List.class, cls);
-        List response = (List<?>) JsonUtil.getJsonMapper().readValue(json, typeInfo);
-        return response;
+        return JsonUtil.deserializeToList(json, cls);
       }
       else if(String.class.equals(cls)) {
         if(json != null && json.startsWith("\"") && json.endsWith("\"") && json.length() > 1)
@@ -169,10 +164,10 @@ public class ApiInvoker {
           return json;
       }
       else {
-        return JsonUtil.getJsonMapper().readValue(json, cls);
+        return JsonUtil.deserializeToObject(json, cls);
       }
     }
-    catch (IOException e) {
+    catch (JsonParseException e) {
       throw new ApiException(500, e.getMessage());
     }
   }
@@ -180,7 +175,7 @@ public class ApiInvoker {
   public static String serialize(Object obj) throws ApiException {
     try {
       if (obj != null)
-        return JsonUtil.getJsonMapper().writeValueAsString(obj);
+        return JsonUtil.serialize(obj);
       else
         return null;
     }
@@ -381,7 +376,7 @@ public class ApiInvoker {
       schemeRegistry.register(httpsScheme);
       schemeRegistry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
 
-      ignoreSSLConnectionManager = new SingleClientConnManager(new BasicHttpParams(), schemeRegistry);
+      ignoreSSLConnectionManager = new ThreadSafeClientConnManager(new BasicHttpParams(), schemeRegistry);
     } catch (NoSuchAlgorithmException e) {
       // This will only be thrown if SSL isn't available for some reason.
     } catch (KeyManagementException e) {

@@ -24,10 +24,16 @@ cd $APP_DIR
 ./bin/html-petstore.sh
 ./bin/jaxrs-petstore-server.sh
 ./bin/java-petstore.sh
+./bin/qt5-petstore.sh
+./bin/perl-petstore.sh
 ./bin/php-petstore.sh
 ./bin/python-petstore.sh
+./bin/retrofit-petstore.sh
 ./bin/ruby-petstore.sh
 ./bin/objc-petstore.sh
 ./bin/scala-petstore.sh
+./bin/silex-petstore-server.sh
 ./bin/spring-mvc-petstore-server.sh
 ./bin/tizen-petstore.sh
+./bin/typescript-angular-petstore.sh
+./bin/typescript-node-petstore.sh
