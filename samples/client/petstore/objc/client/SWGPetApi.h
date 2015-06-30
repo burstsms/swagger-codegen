@@ -2,10 +2,14 @@
 #import "SWGPet.h"
 #import "SWGFile.h"
 #import "SWGObject.h"
+#import "SWGApiClient.h"
 
 
 @interface SWGPetApi: NSObject
 
+@property(nonatomic, assign)SWGApiClient *apiClient;
+
+-(instancetype) initWithApiClient:(SWGApiClient *)apiClient;
 -(void) addHeader:(NSString*)value forKey:(NSString*)key;
 -(unsigned long) requestQueueSize;
 +(SWGPetApi*) apiWithHeader:(NSString*)headerValue key:(NSString*)key;
@@ -116,13 +120,13 @@
  Deletes a pet
  
 
- @param api_key 
+ @param apiKey 
  @param petId Pet id to delete
  
 
  return type: 
  */
--(NSNumber*) deletePetWithCompletionBlock :(NSString*) api_key 
+-(NSNumber*) deletePetWithCompletionBlock :(NSString*) apiKey 
      petId:(NSNumber*) petId 
     
     

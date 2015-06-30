@@ -38,10 +38,14 @@ public class UserApi {
   }
 
   
-  
+  /**
+   * Create user
+   * This can only be done by the logged in user.
+   * @param body Created user object
+   * @return void
+   */
   public void  createUser (User body) throws ApiException {
     Object postBody = body;
-
     
 
     // create path and map variables
@@ -88,10 +92,14 @@ public class UserApi {
     }
   }
   
-  
+  /**
+   * Creates list of users with given input array
+   * 
+   * @param body List of user object
+   * @return void
+   */
   public void  createUsersWithArrayInput (List<User> body) throws ApiException {
     Object postBody = body;
-
     
 
     // create path and map variables
@@ -138,10 +146,14 @@ public class UserApi {
     }
   }
   
-  
+  /**
+   * Creates list of users with given input array
+   * 
+   * @param body List of user object
+   * @return void
+   */
   public void  createUsersWithListInput (List<User> body) throws ApiException {
     Object postBody = body;
-
     
 
     // create path and map variables
@@ -188,10 +200,15 @@ public class UserApi {
     }
   }
   
-  
+  /**
+   * Logs user into the system
+   * 
+   * @param username The user name for login
+   * @param password The password for login in clear text
+   * @return String
+   */
   public String  loginUser (String username, String password) throws ApiException {
     Object postBody = null;
-
     
 
     // create path and map variables
@@ -242,10 +259,13 @@ public class UserApi {
     }
   }
   
-  
+  /**
+   * Logs out current logged in user session
+   * 
+   * @return void
+   */
   public void  logoutUser () throws ApiException {
     Object postBody = null;
-
     
 
     // create path and map variables
@@ -292,10 +312,19 @@ public class UserApi {
     }
   }
   
-  
+  /**
+   * Get user by user name
+   * 
+   * @param username The name that needs to be fetched. Use user1 for testing. 
+   * @return User
+   */
   public User  getUserByName (String username) throws ApiException {
     Object postBody = null;
-
+    
+    // verify the required parameter 'username' is set
+    if (username == null) {
+       throw new ApiException(400, "Missing the required parameter 'username' when calling getUserByName");
+    }
     
 
     // create path and map variables
@@ -342,10 +371,20 @@ public class UserApi {
     }
   }
   
-  
+  /**
+   * Updated user
+   * This can only be done by the logged in user.
+   * @param username name that need to be deleted
+   * @param body Updated user object
+   * @return void
+   */
   public void  updateUser (String username, User body) throws ApiException {
     Object postBody = body;
-
+    
+    // verify the required parameter 'username' is set
+    if (username == null) {
+       throw new ApiException(400, "Missing the required parameter 'username' when calling updateUser");
+    }
     
 
     // create path and map variables
@@ -392,10 +431,19 @@ public class UserApi {
     }
   }
   
-  
+  /**
+   * Delete user
+   * This can only be done by the logged in user.
+   * @param username The name that needs to be deleted
+   * @return void
+   */
   public void  deleteUser (String username) throws ApiException {
     Object postBody = null;
-
+    
+    // verify the required parameter 'username' is set
+    if (username == null) {
+       throw new ApiException(400, "Missing the required parameter 'username' when calling deleteUser");
+    }
     
 
     // create path and map variables
