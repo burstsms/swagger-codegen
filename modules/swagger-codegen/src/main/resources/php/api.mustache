@@ -123,7 +123,7 @@ class {{classname}} {
       $response = $this->apiClient->callAPI($resourcePath, $method,
                                             $queryParams, $httpBody,
                                             $headerParams, $authSettings);
-
+      return $response->getResponseBody();
       {{#returnType}}if(! $response) {
         return null;
       }
