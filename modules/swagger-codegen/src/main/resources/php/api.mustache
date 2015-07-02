@@ -137,7 +137,7 @@ class {{classname}} {
         $response = $this->apiClient->callAPI($resourcePath, $method,
                                               $queryParams, $httpBody,
                                               $headerParams);
-        return $response;
+        return $response->getResponseBody();
       } catch (ApiException $e) {
         switch ($e->getCode()) { {{#responses}}{{#dataType}}
           case {{code}}:
