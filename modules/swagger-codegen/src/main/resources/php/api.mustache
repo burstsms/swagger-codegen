@@ -137,7 +137,12 @@ class {{classname}} {
         $response = $this->apiClient->callAPI($resourcePath, $method,
                                               $queryParams, $httpBody,
                                               $headerParams);
-        return $response->getResponseBody();
+        if(method_exists($response,'getResponseBody')){
+        	return $response->getResponseBody();
+        }
+        else{
+        	return $response;
+        }
       } catch (ApiException $e) {
         switch ($e->getCode()) { {{#responses}}{{#dataType}}
           case {{code}}:
