@@ -172,14 +172,14 @@ class ApiClient {
 
     // Handle the response
     if ($response_info['http_code'] == 0) {
-      throw new ApiException("API call to $url timed out: ".serialize($response_info), 0, null, null);
+      return new ApiException("API call to $url timed out: ".serialize($response_info), 0, null, null);
     } else if ($response_info['http_code'] >= 200 && $response_info['http_code'] <= 299 ) {
       $data = json_decode($http_body);
       if (json_last_error() > 0) { // if response is a string
         $data = $http_body;
       }
     } else {
-      throw new ApiException("[".$response_info['http_code']."] Error connecting to the API ($url)",
+      return new ApiException("[".$response_info['http_code']."] Error connecting to the API ($url)",
         $response_info['http_code'], $http_header, $http_body);
     }
     return $data;
