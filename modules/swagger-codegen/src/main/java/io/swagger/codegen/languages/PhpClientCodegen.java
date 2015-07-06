@@ -19,7 +19,7 @@ public class PhpClientCodegen extends DefaultCodegen implements CodegenConfig {
     protected String invokerPackage = "Burstsms\\Payment";
     protected String groupId = "swagger";
     protected String artifactId = "swagger-client";
-    protected String packagePath = "payment-sdk-php";
+    protected String packagePath = "payment-php-sdk";
     protected String artifactVersion = null;
     protected String srcBasePath = "lib";
 
