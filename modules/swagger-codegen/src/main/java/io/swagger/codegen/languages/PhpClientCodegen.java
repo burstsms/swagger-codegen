@@ -16,10 +16,10 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 public class PhpClientCodegen extends DefaultCodegen implements CodegenConfig {
-    protected String invokerPackage = "Swagger\\Client";
+    protected String invokerPackage = "Burstsms\\Payment";
     protected String groupId = "swagger";
     protected String artifactId = "swagger-client";
-    protected String packagePath = "SwaggerClient-php";
+    protected String packagePath = "payment-sdk-php";
     protected String artifactVersion = null;
     protected String srcBasePath = "lib";
 
