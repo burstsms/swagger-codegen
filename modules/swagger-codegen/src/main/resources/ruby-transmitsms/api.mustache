@@ -22,7 +22,7 @@ class {{classname}}
 
   def config_swagger()
     Swagger.configure do |config|
-      config.host = "{{basePath}}".gsub("http://", "").gsub("/", "")
+      config.host = "{{basePath}}".gsub("http://", "").gsub("https://", "").gsub("/", "")
       config.base_path = "/"
       config.format = "x-www-form-urlencoded"
       config.camelize_params = false
